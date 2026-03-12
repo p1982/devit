@@ -1,0 +1,26 @@
+{
+  "name": "@devit-monorepo/backend-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@devit-monorepo/backend"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "backend-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@devit-monorepo/backend:build",
+          "@devit-monorepo/backend:serve"
+        ]
+      }
+    }
+  }
+}
