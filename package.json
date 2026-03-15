@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "prepare": "husky",
     "serve:frontend": "nx serve frontend",
     "serve:backend": "nx serve backend",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",

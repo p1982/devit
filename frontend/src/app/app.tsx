@@ -32,6 +32,9 @@ export function App() {
 
       const resetSecondInterval = setInterval(() => {
         sentThisSecond = 0;
+        if (!cancelled) {
+          void sendNext();
+        }
       }, 1000);
 
       const sendNext = async () => {
@@ -52,12 +55,17 @@ export function App() {
           axios
             .post('/api', { index: currentIndex })
             .then((response) => {
-              if (response.status === 200 && typeof response.data?.index === 'number') {
-                dispatch(addResult(response.data.index));
+              console.log('API Response:', response.data);
+              if (response.status === 200 || response.status === 201) {
+                if (typeof response.data?.index === 'number') {
+                  dispatch(addResult(response.data.index));
+                } else {
+                  console.warn('Response data index is not a number:', response.data);
+                }
               }
             })
-            .catch(() => {
-              // помилки просто ігноруємо для відображення успішних індексів
+            .catch((err) => {
+              console.error('API Error:', err.response?.data || err.message);
             })
             .finally(() => {
               inFlight -= 1;

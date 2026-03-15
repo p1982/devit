@@ -1,4 +1,4 @@
-import { Inject, Injectable, TooManyRequestsException } from '@nestjs/common';
+import { Inject, Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import type Redis from 'ioredis';
 
 @Injectable()
@@ -21,8 +21,9 @@ export class AppService {
     }
 
     if (currentCount > 50) {
-      throw new TooManyRequestsException(
+      throw new HttpException(
         'Rate limit of 50 requests per second exceeded',
+        HttpStatus.TOO_MANY_REQUESTS,
       );
     }
 

@@ -1,90 +1,95 @@
-# DevitMonorepo
+# DevIT Monorepo - Client-Server Data Fetch
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+[English](#english) | [Українська](#українська)
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+---
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## English
 
-## Finish your CI setup
+### Project Description
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/pSD5dkGkyO)
+This is a full-stack TypeScript project built using an **Nx Monorepo**. The application demonstrates a client-server architecture handling high-concurrency API requests while enforcing server-side rate limits.
 
+The task implements a scenario where the React frontend sends up to 1000 asynchronous HTTP requests to a backend API. The frontend controls concurrency and limiting, while the backend utilizes Redis to track and enforce a strict 50 requests/second limit, returning a `429 Too Many Requests` error if exceeded.
 
-## Generate a library
+**Technology Stack:**
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
-```
+- **Language:** TypeScript
+- **Frontend:** ReactJS (Vite)
+- **Backend:** NestJS / Koa / Express
+- **Storage:** Redis (for rate-limiting)
+- **Environment:** Docker
+- **Workspace:** Nx
 
-## Run tasks
+### How to Start the Project
 
-To build the library use:
+**Prerequisites:**
 
-```sh
-npx nx build pkg1
-```
+- Node.js (version 22+ recommended)
+- Docker Desktop (must be running to use Redis)
 
-To run any task with Nx use:
+1. **Install Dependencies**
+   Run the following command in the root directory:
 
-```sh
-npx nx <target> <project-name>
-```
+   ```bash
+   npm install
+   ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+2. **Start the Application**
+   You can start both the frontend, backend, and the Redis database simultaneously with a single command:
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+   ```bash
+   make start
+   ```
 
-## Versioning and releasing
+   _(This command runs `docker-compose up -d redis` followed by `npx nx run-many --target=serve`)_
 
-To version and release the library use
+3. **Access the Apps**
+   - Frontend is typically available at `http://localhost:4200`
+   - Backend API is typically running on `http://localhost:3000`
 
-```
-npx nx release
-```
+---
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+## Українська
 
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Опис проекту
 
-## Keep TypeScript project references up to date
+Це full-stack проект на TypeScript, створений на базі **монорепозиторію Nx**. Застосунок демонструє клієнт-серверну архітектуру з обробкою висококонкурентних API-запитів та дотриманням лімітів на стороні сервера.
 
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
+Завдання реалізує сценарій, у якому React-фронтенд надсилає до 1000 асинхронних HTTP-запитів до бекенд-API. Фронтенд контролює ліміт конкурентності, тоді як бекенд використовує Redis для відстеження та забезпечення жорсткого ліміту в 50 запитів на секунду, повертаючи помилку `429 Too Many Requests` у разі перевищення.
 
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
+**Технологічний стек:**
 
-```sh
-npx nx sync
-```
+- **Мова:** TypeScript
+- **Frontend:** ReactJS (Vite)
+- **Backend:** NestJS / Koa / Express
+- **Сховище:** Redis (для обмеження швидкості запитів)
+- **Середовище:** Docker
+- **Робочий простір:** Nx
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+### Як запустити проект
 
-```sh
-npx nx sync:check
-```
+**Вимоги:**
 
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
+- Node.js (рекомендується версія 22+)
+- Docker Desktop (має бути запущений для роботи Redis)
 
+1. **Встановіть залежності**
+   Виконайте наступну команду в кореневій папці:
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+   ```bash
+   npm install
+   ```
 
-## Install Nx Console
+2. **Запустіть застосунок**
+   Ви можете запустити фронтенд, бекенд та базу даних Redis одночасно за допомогою однієї команди:
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+   ```bash
+   make start
+   ```
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+   _(Ця команда автоматично виконує `docker-compose up -d redis`, а потім `npx nx run-many --target=serve`)_
 
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+3. **Доступ до додатків**
+   - Frontend зазвичай доступний за адресою `http://localhost:4200`
+   - Backend API зазвичай працює на порту `http://localhost:3000`
