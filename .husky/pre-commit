@@ -1,2 +1,2 @@
-npm run lint
-npm run format:check
+NX_NO_CLOUD=true npx nx run-many --target=lint --all --parallel=3
+NX_NO_CLOUD=true npx nx run-many --target=test --all --parallel=3

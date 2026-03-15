@@ -11,6 +11,8 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    env:
+      NX_NO_CLOUD: true
 
     steps:
       - name: Checkout Repository
